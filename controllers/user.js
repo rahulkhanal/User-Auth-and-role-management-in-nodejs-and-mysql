@@ -40,7 +40,6 @@ module.exports = {
   },
   login: (req, resp) => {
     const { username, password } = req.body;
-    console.log(req.body);
     con.query(`SELECT * FROM users WHERE email = ?`, [username], (err, res) => {
       if (err) {
         resp.json({
@@ -58,11 +57,15 @@ module.exports = {
       } else {
         let validatation = bcrypt.compareSync(password, res[0].password);
         if (validatation) {
-          const token = jwt.sign({ username }, "secret_key", {
+          const token = jwt.sign({ username, role: res[0].role }, "secret_key", {
             expiresIn: "1h",
           });
+          
+          req.user = {
+            role: res[0].role,
+          };
           // resp.json({ token });
-          resp.cookie("token", token, { maxAge: 10000, httpOnly: true });
+          resp.cookie("token", token, { maxAge: 5000, httpOnly: true });
           resp.redirect("/api/about");
         } else {
           resp.json({
