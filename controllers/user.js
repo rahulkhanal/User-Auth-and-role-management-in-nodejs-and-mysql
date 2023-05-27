@@ -57,10 +57,14 @@ module.exports = {
       } else {
         let validatation = bcrypt.compareSync(password, res[0].password);
         if (validatation) {
-          const token = jwt.sign({ username, role: res[0].role }, "secret_key", {
-            expiresIn: "1h",
-          });
-          
+          const token = jwt.sign(
+            { username, role: res[0].role },
+            "secret_key",
+            {
+              expiresIn: "1h",
+            }
+          );
+
           req.user = {
             role: res[0].role,
           };

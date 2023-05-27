@@ -28,10 +28,14 @@ router.get("/login", (req, resp) => {
   const filePath = path.join(__dirname, "/assets/login.html");
   resp.sendFile(filePath);
 });
+router.get("/register", (req, resp) => {
+  const filePath = path.join(__dirname, "/assets/register.html");
+  resp.sendFile(filePath);
+});
 
 router.get("/about", authenticateToken, (req, resp) => {
   console.log(req.user);
-  if (req.user.role === "CEO") {
+  if (req.user.role === "ceo") {
     const filePath = path.join(__dirname, "/assets/about.html");
     resp.sendFile(filePath);
   } else {

@@ -2,9 +2,9 @@
 <html>
   <head>
     <style>
-        *{
-            box-sizing: border-box;
-        }
+      * {
+        box-sizing: border-box;
+      }
       .form-container {
         width: 300px;
         margin: 25vh auto;
@@ -18,7 +18,9 @@
         font-weight: bold;
       }
       .form-group input[type="text"],
-      .form-group input[type="password"] {
+      .form-group input[type="password"],
+      select,
+      .form-group input[type="email"] {
         width: 100%;
         padding: 8px;
         border: 1px solid #ccc;
@@ -37,10 +39,22 @@
   </head>
   <body>
     <div class="form-container">
-      <form method="post" action="http://localhost:7000/api/login">
+      <form method="post" action="http://localhost:7000/api/register">
         <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username" required />
+          <label for="username">Name:</label>
+          <input type="text" id="username" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="username">UserId:</label>
+          <input type="email" id="username" name="email" required />
+        </div>
+        <div>
+          <label for="role">Roles:</label>
+          <select name="role" id="role">
+            <option value="ceo">CEO</option>
+            <option value="manager">Manager</option>
+            <option value="staff">Staff</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="password">Password:</label>
@@ -50,7 +64,7 @@
           <input type="submit" value="Submit" />
         </div>
       </form>
-      <a href="/api/register"><button>REGISTER</button></a>
+      <a href="/api/login"><button>LOGIN</button></a>
     </div>
   </body>
 </html>
